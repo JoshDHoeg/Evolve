@@ -46,7 +46,7 @@ const Navigation = () => (
           </Typography>
           <Button color="inherit"><Link to={ROUTES.LANDING}>Landing</Link></Button>
           <Button color="inherit"><Link to={ROUTES.COMPANY}>Company</Link></Button>
-          <Button color="inherit"><Link to={ROUTES.ACCOUNT}>Account</Link></Button>
+          <Button color="inherit"><Link to={ROUTES.FOUNDER}>Profile</Link></Button>
           <Button color="inherit"><Link to={ROUTES.ADMIN}>Admin</Link></Button>
           <Button color="inherit"><SignOutButton /></Button>
         </Toolbar>

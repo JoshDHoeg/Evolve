@@ -28,7 +28,8 @@ const App = () => (
         />
         <Route exact path={ROUTES.COMPANY} component={CompanyProfile} />
         <Route path={ROUTES.COMPANY_EDIT} component={CompanyProfileEdit} />
-        <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+        <Route path={ROUTES.FOUNDER} component={AccountPage} />
+        <Route path={ROUTES.FOUNDER_EDIT} component={AccountPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
         </div>
     </Router>
