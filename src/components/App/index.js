@@ -5,14 +5,9 @@ import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
-<<<<<<< HEAD
-import HomePage from '../Home';
-import AccountPage from '../User/Edit/Edit';
-=======
 import CompanyProfile from '../CompanyProfile/View/View.jsx';
 import CompanyProfileEdit from '../CompanyProfile/Edit/Edit.jsx';
 import AccountPage from '../User/View/View';
->>>>>>> b04d31d2d4c54694b6c2fe478e7540a61306b517
 import AdminPage from '../Admin';
 
 import * as ROUTES from '../../utilities/constants/routes';
