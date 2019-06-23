@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import logo from '../../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../../utilities/constants/routes';
-
+import firebase from 'firebase'
 import FounderCard from './FounderCard.jsx';
 import { withAuthorization } from '../../../utilities/Session';
 
@@ -48,13 +48,33 @@ const useStyles = makeStyles({
   },
 });
 
-const CompanyProfile = () => {
+const CompanyProfile = (props) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   
+  const [company, setCompany] = useState({ description: '', founders: [], name: '', revenue: [], website: '' })
+  const [userCompany, setUser] = useState(null)
   useEffect(() => {
-    let 
-    function companyInfo()
+    let uid = firebase.auth().currentUser.uid
+    props.firebase.userCompany(uid).on('value', snapshot => {
+      const userObject = snapshot.val()
+      setUser(userObject);
+      
+      console.log(userObject)
+      // let Cid = userObject
+      // props.firebase.company(Cid).on('value', snapshot => {
+      //   const companyObject = snapshot.val()
+      //   setCompany(companyObject);
+      //   console.log('Company', companyObject)
+      // })
+
+    });
+    return () => {
+      props.firebase.company().off();
+      props.firebase.userCompany().off();
+    }
+
+    
   })
 
 

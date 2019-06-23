@@ -47,19 +47,62 @@ class Firebase {
 
   companySelection = (Cid) => {
     let uid = firebase.auth().currentUser.uid
+    this.props.firebase.founder(Cid).set({
+      [this.state.user.name]: uid 
+    })
+    this.props.firebase.user(uid).set({
+      companyID: Cid
+    })
+  }
+
+  getCurrentUser = () => {
+      let uid = firebase.auth().currentUser.uid
+      this.props.firebase.user(uid).on('value', snapshot => {
+        const userObject = snapshot.val()
+        this.setState({
+            user: userObject
+        })
+      });
+  }
+
+  getCurrentCompany = () => {
+    let uid = firebase.auth().currentUser.uid
     this.props.firebase.user(uid).on('value', snapshot => {
       const userObject = snapshot.val()
       this.setState({
-          loading: false,
-          user: userObject
+          userCompany: userObject.companyID
       })
-      console.log('user', this.state.user)
-  });
-    this.props.firebase.founder(Cid).push({
-      [uid]: true
+    });
+    this.props.firebase.company(this.state.userCompany).on('value', snapshot => {
+      const companyObject = snapshot.val()
+      this.setState({
+          company: companyObject
+      })
     })
-    this.props.firebase.user(uid).set({
-      [Cid]: true
+  }
+
+  doCreateCompany = (description, founders, name, website) => {
+    let newCompanyKey = firebase.database().ref().child('companies').push().key;
+    this.props.firebase.company(newCompanyKey).set({
+      description: description,
+      founders: founders,
+      name: name,
+      revenue: 0,
+      website: website
+    })
+  }
+
+  getAllCompanies = () => { //setup is super similar to admin page
+    this.props.firebase.companies().on('value', snapshot => {
+      const companyObject = snapshot.val()
+      const companyList = Object.keys(companyObject).map(key => ({
+        ...companyObject[key],
+        Cid: key,
+      }));
+      this.setState({
+        companies: companyList,
+        loading: false,
+      });
     })
   }
 
