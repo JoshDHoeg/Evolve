@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
     link: {
         textDecoration: 'none',
-        color: '#ffffff',
+        color: '#000000',
       },
   });
 
@@ -51,7 +51,7 @@ const FounderCard = () => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small"><Link className={classes.link} to={ROUTES.COMPANY_EDIT}>View Profile</Link></Button>
+                <Button size="small"><Link className={classes.link} to={ROUTES.FOUNDER}>View Profile</Link></Button>
             </CardActions>
         </Card>
     );

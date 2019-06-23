@@ -1,11 +1,12 @@
 import React from 'react';
+import { useInput } from '../../../hooks/input-hook';
 import logo from '../../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../../utilities/constants/routes';
 import { withAuthorization } from '../../../utilities/Session';
 
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,7 +49,19 @@ const useStyles = makeStyles({
 
 const CompanyProfileEdit = () => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  
+  const { value:companyName, bind:bindCompanyName, reset:resetCompanyName } = useInput('');
+  const { value:companyDescription, bind:bindCompanyDescription, reset:resetCompanyDescription } = useInput('');
+  const { value:companyWebsite, bind:bindCompanyWebsite, reset:resetCompanyWebsite } = useInput('');
+
+  
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    alert(`Submitting Name ${companyName} ${companyDescription} ${companyWebsite}`);
+    resetCompanyName();
+    resetCompanyDescription();
+    resetCompanyWebsite();
+}
 
   return(
     <Grid container spacing={12} justify="center" >
@@ -56,21 +69,41 @@ const CompanyProfileEdit = () => {
           <Grid item xs ={12} className={classes.imageWrapper}>
             <img src={logo} className={classes.image} />
           </Grid>
-          <Typography variant="h1" className={classes.companyName}>
-            Evolve
-          </Typography>
-          <Typography variant="h2" className={classes.companyDescription}>
-            Evolve, is a company dedicated to the success of startups through the evolutionary theory of "evolve or die"
-          </Typography>
-          <Button variant="contained" color="primary" className={classes.button}>
-            Company Website
-          </Button>
-          <Button variant="contained" color="primary" className={classes.button}>
-            <Link className={classes.link} to={ROUTES.COMPANY}>Save Profile</Link>
-          </Button>
-      </Grid>
-      <Grid container spacing={12} justify="center" className={classes.founders}>
-      </Grid>
+          <form onSubmit={handleSubmit}>
+            <TextField
+                id="outlined-input"
+                label="companyName"
+                type="text"
+                name="companyName"
+                margin="normal"
+                variant="outlined"
+                {...bindCompanyName}
+            />
+            <TextField
+                id="outlined-input"
+                label="companyWebsite"
+                type="text"
+                name="companyWebsite"
+                margin="normal"
+                variant="outlined"
+                {...bindCompanyWebsite}
+            />
+            <TextField
+                id="outlined-full-width"
+                fullWidth
+                label="companyDescription"
+                type="text"
+                name="companyDescription"
+                margin="normal"
+                variant="outlined"
+                {...bindCompanyDescription}
+            />
+
+            <Button variant="contained" color="primary" className={classes.button} type="submit">
+                <Link className={classes.link} to={ROUTES.COMPANY}>Save Profile</Link>
+            </Button>
+            </form>
+        </Grid>
     </Grid>
   )
 };
