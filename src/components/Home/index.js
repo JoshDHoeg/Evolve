@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { withAuthorization } from '../Session';
+import { withAuthorization } from '../../utilities/Session';
 
 const HomePage = () => (
   <div>

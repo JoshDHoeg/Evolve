@@ -27,18 +27,18 @@ var prodConfig = {
 const config =
   process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 
+
 class Firebase {
   constructor() {
     app.initializeApp(config);
-
     this.auth = app.auth();
     this.db = app.database();
   }
 
     // *** Auth API ***
 
-    doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+  doCreateUserWithEmailAndPassword = (email, password) =>
+  this.auth.createUserWithEmailAndPassword(email, password);
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -51,10 +51,15 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
 
       // *** User API ***
-
   user = uid => this.db.ref(`users/${uid}`);
-
   users = () => this.db.ref('users');
+
+  company = uid => this.db.ref(`companies/${uid}`);
+  companies = () => this.db.ref('companies');
+
+  revenue = uid => this.db.ref(`revenues/${uid}`);
+  revenues = () => this.db.ref('revenues');
+
 }
 
 export default Firebase;
