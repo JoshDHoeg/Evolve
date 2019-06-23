@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import { withFirebase } from '../../utilities/Firebase';
 import * as ROUTES from '../../utilities/constants/routes';
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
 const PasswordForgetPage = () => (
-  <div>
+  <Grid container spacing={12} justify="center">
     <h1>PasswordForget</h1>
     <PasswordForgetForm />
-  </div>
+    </Grid>
 );
 
 const INITIAL_STATE = {
@@ -48,20 +52,29 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
-
-        {error && <p>{error.message}</p>}
-      </form>
+      <Grid container spacing={12} justify="center">
+        <form onSubmit={this.onSubmit}>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-email-input"
+              label="Email"
+              type="email"
+              name="email"
+              margin="normal"
+              variant="outlined"
+              value={this.state.email}
+              onChange={this.onChange}
+            />
+          </Grid>
+          <Grid container xs={12} justify="center">
+            <Button variant="contained" color="primary" disabled={isInvalid} type="submit">
+              Reset My Password
+            </Button>
+          </Grid>
+          {error && <p>{error.message}</p>}
+        </form>
+      </Grid>
     );
   }
 }

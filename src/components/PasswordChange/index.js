@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import { withFirebase } from '../../utilities/Firebase';
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
 const INITIAL_STATE = {
   passwordOne: '',
   passwordTwo: '',
@@ -41,27 +45,43 @@ class PasswordChangeForm extends Component {
       passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
+      <Grid container spacing={12} justify="center">
+        <form onSubmit={this.onSubmit}>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-password-input"
+              label="New Password"
+              type="password"
+              margin="normal"
+              variant="outlined"
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Confirm New Password"
+              type="password"
+              margin="normal"
+              variant="outlined"
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+            />
+          </Grid>
+          <Grid container xs={12} justify="center">
+            <Button variant="contained" color="primary" disabled={isInvalid} type="submit">
+              Reset My Password
+            </Button>
+          </Grid>
 
-        {error && <p>{error.message}</p>}
-      </form>
+          {error && <p>{error.message}</p>}
+        </form>
+      </Grid>
     );
   }
 }

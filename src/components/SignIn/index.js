@@ -7,13 +7,36 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../../utilities/Firebase';
 import * as ROUTES from '../../utilities/constants/routes';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  dense: {
+    marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 200,
+  },
+}));
+
 const SignInPage = () => (
-  <div>
+  <Grid container spacing={12} justify="center">
     <h1>SignIn</h1>
     <SignInForm />
     <PasswordForgetLink />
     <SignUpLink />
-  </div>
+  </Grid>
 );
 
 const INITIAL_STATE = {
@@ -23,11 +46,13 @@ const INITIAL_STATE = {
 };
 
 class SignInFormBase extends Component {
+  
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
   }
+  
 
   onSubmit = event => {
     const { email, password } = this.state;
@@ -51,31 +76,48 @@ class SignInFormBase extends Component {
 
   render() {
     const { email, password, error } = this.state;
-
+    
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+      <Grid container spacing={12} justify="center">
+        <form onSubmit={this.onSubmit}>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="outlined-email-input"
+            label="Email"
+            type="email"
+            name="email"
+            margin="normal"
+            variant="outlined"
+            value={email}
+            onChange={this.onChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            margin="normal"
+            variant="outlined"
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+        </Grid>
+        <Grid container spacing={12} justify="center">
+          <Button variant="contained" color="primary" disabled={isInvalid} type="submit">
+            Sign In
+          </Button>
+        </Grid>
 
-        {error && <p>{error.message}</p>}
-      </form>
+          {error && <p>{error.message}</p>}
+        </form>
+      </Grid>
     );
   }
 }
