@@ -4,11 +4,15 @@ import { compose } from 'recompose';
 import { withFirebase } from '../../utilities/Firebase';
 import * as ROUTES from '../../utilities/constants/routes';
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
 const SignUpPage = () => (
-  <div>
+  <Grid container spacing={12} justify="center">
     <h1>SignUp</h1>
     <SignUpForm />
-  </div>
+  </Grid>
 );
 
 const INITIAL_STATE = {
@@ -41,7 +45,7 @@ class SignUpFormBase extends Component {
           });
       }).then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.ACCOUNT);
       })
       .catch(error => {
         this.setState({ error });
@@ -70,41 +74,71 @@ class SignUpFormBase extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign Up
-        </button>
+      <Grid container spacing={12} justify="center">
+        <form onSubmit={this.onSubmit}>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-input"
+              label="Name"
+              type="text"
+              name="username"
+              margin="normal"
+              variant="outlined"
+              value={username}
+              onChange={this.onChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-email-input"
+              label="Email"
+              type="email"
+              name="email"
+              margin="normal"
+              variant="outlined"
+              value={email}
+              onChange={this.onChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              margin="normal"
+              variant="outlined"
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+              placeholder="Password"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Confirm Password"
+              type="password"
+              margin="normal"
+              variant="outlined"
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+              placeholder="Password"
+            />
+          </Grid>
+          <Grid container xs={12} justify="center">
+            <Button variant="contained" color="primary" disabled={isInvalid} type="submit">
+              Sign Up
+            </Button>
+          </Grid>
 
-        {error && <p>{error.message}</p>}
-      </form>
+          {error && <p>{error.message}</p>}
+        </form>
+      </Grid>
     );
   }
 }
