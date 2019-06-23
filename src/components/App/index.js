@@ -5,7 +5,8 @@ import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
+import CompanyProfile from '../CompanyProfile/View/View.jsx';
+import CompanyProfileEdit from '../CompanyProfile/Edit/Edit.jsx';
 import AccountPage from '../User/View/View';
 import AdminPage from '../Admin';
 
@@ -25,7 +26,8 @@ const App = () => (
           path={ROUTES.PASSWORD_FORGET}
           component={PasswordForgetPage}
         />
-        <Route path={ROUTES.HOME} component={HomePage} />
+        <Route exact path={ROUTES.COMPANY} component={CompanyProfile} />
+        <Route path={ROUTES.COMPANY_EDIT} component={CompanyProfileEdit} />
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
         </div>
