@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import logo from '../../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../../utilities/constants/routes';
@@ -51,6 +51,13 @@ const useStyles = makeStyles({
 const CompanyProfile = () => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+  
+  useEffect(() => {
+    let 
+    function companyInfo()
+  })
+
+
 
   return(
     <Grid container spacing={12} justify="center" >
