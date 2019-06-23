@@ -80,7 +80,7 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
   users = () => this.db.ref('users');
 
-  company = uid => this.db.ref(`companies/${uid}`);
+  company = Cid => this.db.ref(`companies/${Cid}`);
   companies = () => this.db.ref('companies');
 
   founder = (Cid) => this.db.ref(`companies/${Cid}/founders`)
