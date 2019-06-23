@@ -45,6 +45,24 @@ class Firebase {
 
     // *** Auth API ***
 
+  companySelection = (Cid) => {
+    let uid = firebase.auth().currentUser.uid
+    this.props.firebase.user(uid).on('value', snapshot => {
+      const userObject = snapshot.val()
+      this.setState({
+          loading: false,
+          user: userObject
+      })
+      console.log('user', this.state.user)
+  });
+    this.props.firebase.founder(Cid).push({
+      [uid]: true
+    })
+    this.props.firebase.user(uid).set({
+      [Cuid]: true
+    })
+  }
+
   doCreateUserWithEmailAndPassword = (email, password) =>
   this.auth.createUserWithEmailAndPassword(email, password);
 
@@ -64,6 +82,9 @@ class Firebase {
 
   company = uid => this.db.ref(`companies/${uid}`);
   companies = () => this.db.ref('companies');
+
+  founder = (Cid) => this.db.ref(`companies/${Cid}/founders`)
+  founders = () => this.db.ref('companies/founders')
 
   revenue = uid => this.db.ref(`revenues/${uid}`);
   revenues = () => this.db.ref('revenues');
