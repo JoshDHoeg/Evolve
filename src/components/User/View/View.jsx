@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { withAuthorization } from '../../../utilities/Session';
+import firebase from 'firebase'
 
 class UserView extends Component {
     constructor(props) {
@@ -17,8 +18,14 @@ class UserView extends Component {
 
     componentDidMount() {
         this.setState({loading: true});
-        this.props.firebase.user().on('value', snapshot => {
-            this.setState({loading: false})
+        let uid = firebase.auth().currentUser.uid
+        this.props.firebase.user(uid).on('value', snapshot => {
+            const userObject = snapshot.val()
+            this.setState({
+                loading: false,
+                user: userObject
+            })
+            console.log('user', userObject.email)
         });
     }
 
@@ -28,14 +35,17 @@ class UserView extends Component {
     }
 
     render() {
-        const { user, loading } = this.state;
-
+        console.log('hello')
         return (
             <div>
-                {user.uid}
+                <h2>User: {this.state.user.username}</h2>
+                <h2>Email: {this.state.user.email}</h2>
+                <h2>Company: {this.state.user.company}</h2>
+                <h2>Revenue: {this.state.user.revenue}</h2>
             </div>
         )
     }
 }
+const condition = authUser => !!authUser;
 
-export default withAuthorization(UserView)
+export default withAuthorization(condition)(UserView)

@@ -6,7 +6,7 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
-import AccountPage from '../User/View/View';
+import AccountPage from '../User/Edit/Edit';
 import AdminPage from '../Admin';
 
 import * as ROUTES from '../../utilities/constants/routes';
