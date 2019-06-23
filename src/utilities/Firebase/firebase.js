@@ -59,7 +59,7 @@ class Firebase {
       [uid]: true
     })
     this.props.firebase.user(uid).set({
-      [Cuid]: true
+      [Cid]: true
     })
   }
 
