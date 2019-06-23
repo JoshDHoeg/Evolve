@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { withAuthorization } from '../../../utilities/Session';
 import firebase from 'firebase'
 
-class UserView extends Component {
+class FounderProfileEdit extends Component {
     user;
     constructor(props) {
         super(props)
@@ -99,4 +99,4 @@ class UserView extends Component {
 }
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(UserView)
+export default withAuthorization(condition)(FounderProfileEdit)

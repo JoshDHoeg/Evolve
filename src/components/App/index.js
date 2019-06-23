@@ -7,7 +7,8 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import CompanyProfile from '../CompanyProfile/View/View.jsx';
 import CompanyProfileEdit from '../CompanyProfile/Edit/Edit.jsx';
-import AccountPage from '../User/View/View';
+import FounderProfile from '../FounderProfile/View/View.jsx';
+import FounderProfileEdit from '../FounderProfile/Edit/Edit.jsx';
 import AdminPage from '../Admin';
 
 import * as ROUTES from '../../utilities/constants/routes';
@@ -28,8 +29,8 @@ const App = () => (
         />
         <Route exact path={ROUTES.COMPANY} component={CompanyProfile} />
         <Route path={ROUTES.COMPANY_EDIT} component={CompanyProfileEdit} />
-        <Route path={ROUTES.FOUNDER} component={AccountPage} />
-        <Route path={ROUTES.FOUNDER_EDIT} component={AccountPage} />
+        <Route exact path={ROUTES.FOUNDER} component={FounderProfile} />
+        <Route path={ROUTES.FOUNDER_EDIT} component={FounderProfileEdit} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
         </div>
     </Router>

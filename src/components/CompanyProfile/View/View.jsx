@@ -50,7 +50,6 @@ const useStyles = makeStyles({
 
 const CompanyProfile = () => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return(
     <Grid container spacing={12} justify="center" >
